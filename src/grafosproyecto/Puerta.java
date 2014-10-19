@@ -11,5 +11,13 @@ public class Puerta
         this.cuarto1=cu1;
         this.cuarto2=cu2;
     }
+    public String getCuarto1()
+    {
+        return this.cuarto1.getCuarto();
+    }
+    public String getCuarto2()
+    {
+        return this.cuarto2.getCuarto();
+    }
     
 }

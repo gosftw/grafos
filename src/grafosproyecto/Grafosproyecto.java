@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Grafosproyecto {
 
     static Plano plano;
-    
+    static Plano planoSinEx;
     public static void llenadoPlano()
     {
         plano = new Plano();
@@ -25,6 +25,7 @@ public class Grafosproyecto {
         plano.crearCuarto(new Cuarto("3"));
         plano.crearCuarto(new Cuarto("4"));
         plano.crearCuarto(new Cuarto("5"));
+        plano.crearCuarto(new Cuarto("0"));
         
         plano.crearPuerta("1", "2");
         plano.crearPuerta("1", "5");
@@ -35,9 +36,17 @@ public class Grafosproyecto {
         plano.crearPuerta("3", "4");
         plano.crearPuerta("3", "5");
         
+        plano.crearPuerta("0", "5");
+        plano.crearPuerta("0", "2");
+        plano.crearPuerta("0", "4");
+        
     }
     public static void main(String[] args) {
         llenadoPlano();
+        plano.mostrarPlano();
+        planoSinEx = plano;
+        planoSinEx.eliminarCuarto("0");
+        planoSinEx.mostrarPlano();
         
         if (esEureliano(plano)){
             System.out.println("Si es Eureliano");;

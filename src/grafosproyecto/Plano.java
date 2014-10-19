@@ -20,8 +20,8 @@ public class Plano
     
     public void crearPuerta(String cu1, String cu2)
     {
-        Cuarto cuarto1 = buscarPuerta(cu1);
-        Cuarto cuarto2 = buscarPuerta(cu2);
+        Cuarto cuarto1 = buscarCuarto(cu1);
+        Cuarto cuarto2 = buscarCuarto(cu2);
         if(cu1 != null && cu2 != null)
         {
             cuarto1.addPuerta(cuarto2);
@@ -31,7 +31,7 @@ public class Plano
         }
     }
     
-    public Cuarto buscarPuerta(String cuarto)
+    public Cuarto buscarCuarto(String cuarto)
     {
         Cuarto aux = null;
         for (int i = 0; i < listaCuarto.size(); i++) 
@@ -42,5 +42,46 @@ public class Plano
             }
         }
         return aux;
+    }
+    
+    public void eliminarCuarto(String cuarto)
+    {
+        eliminarPuertas(cuarto);
+        for (int i = 0; i < listaCuarto.size(); i++) {
+            if ((cuarto.equals(listaCuarto.get(i).getCuarto())))
+            {
+                listaCuarto.remove(i);
+            }
+        }
+    }
+    
+    private void eliminarPuertas(String cuarto)
+    {
+        for (int j = 0; j<listaPuerta.size(); j++)
+        {
+            if((cuarto). equals(listaPuerta.get(j).getCuarto1()))
+            {
+                listaPuerta.remove(j);
+            }else
+                if((cuarto).equals(listaPuerta.get(j).getCuarto2()))
+                {
+                    listaPuerta.remove(j);
+                }
+        }
+    }
+    
+    public void mostrarPlano ()
+    {
+        for (int i = 0; i < listaCuarto.size(); i++) 
+        {
+            Cuarto aux = listaCuarto.get(i);
+            System.out.print("["+aux.getCuarto()+"]");
+            for (int j = 0; j < aux.cuarto.size(); j++) 
+            {
+                Cuarto enlace = aux.cuarto.get(j);
+                System.out.print(enlace.getCuarto());                
+            }
+            System.out.println("");
+        }
     }
 }
