@@ -6,6 +6,8 @@ public class Cuarto
     public String dato;
     public ArrayList<Cuarto> cuarto;
     public Boolean visitado = false;
+    public Boolean gradoImpar = false;
+    public int nroComponente;
         
     public Cuarto (String da)
     {

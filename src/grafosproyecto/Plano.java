@@ -6,7 +6,9 @@ public class Plano
 {
     public ArrayList<Cuarto> listaCuarto;
     public ArrayList<Puerta> listaPuerta;
-    
+    public int euleriano;
+    public int cantidadComponentes;
+    public boolean conexo = false;
     public Plano()
     {
         listaCuarto=new ArrayList<Cuarto> ();
@@ -48,9 +50,16 @@ public class Plano
     {
         eliminarPuertas(cuarto);
         for (int i = 0; i < listaCuarto.size(); i++) {
-            if ((cuarto.equals(listaCuarto.get(i).getCuarto())))
+            Cuarto cu=listaCuarto.get(i);
+            if ((cuarto.equals(cu.getCuarto())))
             {
                 listaCuarto.remove(i);
+            }else{
+                for (int j = 0; j < cu.cuarto.size(); j++) {
+                    if((cuarto.equals(cu.cuarto.get(j).getCuarto()))){
+                        cu.cuarto.remove(j);
+                    }
+                }
             }
         }
     }

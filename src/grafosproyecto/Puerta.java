@@ -2,9 +2,9 @@ package grafosproyecto;
 
 public class Puerta 
 {
-    private Cuarto cuarto1;
-    private Cuarto cuarto2;
-    private Boolean visitado = false;
+    public Cuarto cuarto1;
+    public Cuarto cuarto2;
+    public Boolean visitado = false;
     
     public Puerta (Cuarto cu1, Cuarto cu2)
     {
