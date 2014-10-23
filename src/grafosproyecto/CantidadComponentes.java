@@ -34,9 +34,8 @@ public class CantidadComponentes {
                     }
                 }
             }
+        if(num.size()==1) System.out.println("El grafo es Conexo");
+        else System.out.println("El grafo no es Conexo");
         return num.size();
-    }
-    public boolean esConexo(int i){
-        return i==1;
     }
 }

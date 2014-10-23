@@ -47,18 +47,18 @@ public class Grafosproyecto {
     public static void main(String[] args) {
         llenadoPlano(plano, false);
         llenadoPlano(planoConEx, true);
-        plano.mostrarPlano();
-        RecorridoEuler euler = new RecorridoEuler();
-        RecorridoEuler eulerConEx = new RecorridoEuler();
-        euler.recorridoEureliano(" ", plano, plano.listaCuarto.get(0), plano.listaPuerta.get(0));
+        RecorridoEuler euler = new RecorridoEuler(plano);
+        
         CantidadComponentes planoSinExterior= new CantidadComponentes();
-        planoConEx.mostrarPlano();
-        plano.euleriano = euler.esEureliano(plano);
-        plano.cantidadComponentes = planoSinExterior.calcularCantidad(plano);
-        plano.conexo= planoSinExterior.esConexo(plano.cantidadComponentes);
-        eulerConEx.esEureliano(planoConEx);
-        System.out.println(plano.euleriano);
-        System.out.println(plano.cantidadComponentes);
-        System.out.println(plano.conexo);
+        
+        if (planoSinExterior.calcularCantidad(plano)== 1){
+            plano.mostrarPlano();
+            plano.euleriano = euler.esEureliano(plano);
+            if (plano.euleriano.size() < 3){
+                euler.Euler(plano);
+            }
+            euler.recorridoEureliano(" ", plano, plano.listaCuarto.get(2), plano.listaPuerta.get(4));
+
+        }
     }
 }

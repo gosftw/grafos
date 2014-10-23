@@ -6,7 +6,7 @@ public class Plano
 {
     public ArrayList<Cuarto> listaCuarto;
     public ArrayList<Puerta> listaPuerta;
-    public int euleriano;
+    public ArrayList<Cuarto> euleriano;
     public int cantidadComponentes;
     public boolean conexo = false;
     public Plano()
