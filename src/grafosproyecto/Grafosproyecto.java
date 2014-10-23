@@ -22,25 +22,28 @@ public class Grafosproyecto {
         pla.crearCuarto(new Cuarto("2"));
         pla.crearCuarto(new Cuarto("3"));
         pla.crearCuarto(new Cuarto("4"));
-        pla.crearCuarto(new Cuarto("5"));
+        //pla.crearCuarto(new Cuarto("5"));
         
         pla.crearPuerta("1", "2");
-        pla.crearPuerta("1", "5");
+        pla.crearPuerta("1", "3");
+        //pla.crearPuerta("1", "4");
+        //pla.crearPuerta("1", "5");
         
+        pla.crearPuerta("2", "4");
         pla.crearPuerta("2", "3");
-        pla.crearPuerta("2", "5");
+        //pla.crearPuerta("2", "5");
         
         pla.crearPuerta("3", "4");
-        pla.crearPuerta("3", "5");
+        //pla.crearPuerta("3", "5");
         
-        pla.crearPuerta("4", "5");
+        //pla.crearPuerta("4", "5");
         
         if(conExterior){
-            pla.crearCuarto(new Cuarto("0"));
+            /*pla.crearCuarto(new Cuarto("0"));
             pla.crearPuerta("0", "5");
             pla.crearPuerta("0", "2");
             pla.crearPuerta("0", "4");
-        
+        */
         }
         
     }
@@ -55,9 +58,9 @@ public class Grafosproyecto {
             plano.mostrarPlano();
             plano.euleriano = euler.esEureliano(plano);
             if (plano.euleriano.size() < 3){
-                euler.Euler(plano);
+                euler.Euler();
             }
-            euler.recorridoEureliano(" ", plano, plano.listaCuarto.get(2), plano.listaPuerta.get(4));
+            
 
         }
     }

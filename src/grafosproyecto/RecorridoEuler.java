@@ -15,7 +15,7 @@ public class RecorridoEuler {
             if (cu. cantidadCuarto()%2 != 0){
                 verticesGradoImpar.add(cu);
                 cu.gradoImpar = true;
-            }            
+            }
         }
         if(verticesGradoImpar.size() == 2){
             System.out.println("El grafo contiene Caminos eurelianos");
@@ -28,50 +28,84 @@ public class RecorridoEuler {
                 System.out.println("El grafo no es Eureliano");
         return verticesGradoImpar;
     }
-    void Euler(Plano plano) {
-        ArrayList<String> arrayRes = new ArrayList<> ();
+    void Euler() {
+        
         if(plano.euleriano.size() == 2){
             for (int i = 0; i < 2; i++) {
                 Cuarto cu= plano.euleriano.get(i);
-                arrayRes= recorridosE(arrayRes, cu);
-                for (int j = 0; j < arrayRes.size(); j++) {
-                    System.out.println(arrayRes.get(j));            
-                }
+                recorridosE(cu);                
             }
         }else{
             for (int i = 0; i < plano.listaCuarto.size(); i++) {
                 Cuarto cu1= plano.listaCuarto.get(i);
-                arrayRes= recorridosE(arrayRes, cu1);
-                for (int j = 0; j < arrayRes.size(); j++) {
-                    System.out.println(arrayRes.get(j));            
-                }
+                recorridosE(cu1);                
             }
-        }
+        }        
+    }    
+    private void recorridosE(Cuarto cu){
         
-    }
-    
-    private ArrayList recorridosE(ArrayList res ,Cuarto cu) {
-        String cadena = new String();
         for (int i = 0; i < cu.cuarto.size(); i++) {
             Cuarto cuartoAdyacente = cu.cuarto.get(i);
             Puerta pu = buscarPuerta(cu, cuartoAdyacente);
             if (pu!=null){
+                String cadena = new String();
                 cadena = cadena.concat(cu.dato);
-                return eulerRecursivo(res, cadena, cu, cuartoAdyacente, pu);
+                eulerRecursivo(cadena, cu, cuartoAdyacente, pu);
             }
         }
-        return res;
     }
-    private ArrayList eulerRecursivo(ArrayList res,String cadena, Cuarto cu, Cuarto cuartoAdyacente, Puerta pu) {
-        pu.visitado = true;
-        cadena= cadena.concat(cuartoAdyacente.dato);
-        if(puertasSinUsar(cuartoAdyacente)== 0){
-            if(puertasSinUsar()==0){
-                res.add(cadena);
+    private void eulerRecursivo(String cadena, Cuarto cu, Cuarto cuAdy, Puerta pu) {
+        
+        cadena= cadena.concat(cuAdy.dato);
+        pu.visitado=true;
+        if(puertasSinUsar(cuAdy).isEmpty()){
+            if(puertasSinUsar().isEmpty()){
+                System.out.println(cadena);
+                pu.visitado=false;
             }
                 
         }else{
-            puSiguiente
+            if(puertasSinUsar(cuAdy).size() == 1){
+                Cuarto cuSiguiente=buscarCuarto(cuAdy);
+                Puerta puSiguiente=buscarPuerta(cuAdy,cuSiguiente);
+                eulerRecursivo(cadena, cuAdy, cuSiguiente, puSiguiente);
+                //pu.visitado=false;
+            }else{
+                ArrayList<Cuarto> cuartosSig = llenarCuartosAdyacentes(puertasSinUsar(cuAdy),cuAdy);
+                for (int i = 0; i < cuartosSig.size(); i++) {
+                    Cuarto cuSig = cuartosSig.get(i);
+                    Puerta puSig = buscarPuerta(cuAdy, cuSig);
+                    eulerRecursivo(cadena, cuAdy, cuSig, puSig);
+                    //pu.visitado=false;
+                }
+            }
+            
+        }
+        pu.visitado=false;
+        //return;
+    }
+    private ArrayList<Cuarto> llenarCuartosAdyacentes(ArrayList<Puerta> puertasSinUsar, Cuarto cu) {
+        ArrayList<Cuarto> res= new ArrayList<> ();
+            for (int i = 0; i < puertasSinUsar.size(); i++) {
+                Puerta pu = puertasSinUsar.get(i);
+                if (pu.cuarto1.equals(cu)){
+                    res.add(pu.cuarto2);
+                }else res.add(pu.cuarto1);
+            
+        }
+        return res;
+    }
+    private Cuarto buscarCuarto(Cuarto cu) {
+        Cuarto res = null;
+        for (int i = 0; i < cu.cuarto.size(); i++) {
+            Cuarto cu2 = cu.cuarto.get(i);
+            for (int j = 0; j < plano.listaPuerta.size(); j++) {
+                Puerta pu = plano.listaPuerta.get(j);
+                if((pu.cuarto1.equals(cu) && pu.cuarto2.equals(cu2))||(pu.cuarto1.equals(cu2) && pu.cuarto2.equals(cu))){
+                    if(pu.visitado == false) return cu2;
+                }
+                
+            }
         }
         return res;
     }
@@ -90,10 +124,10 @@ public class RecorridoEuler {
     }
 
     
-    public String recorridoEureliano(String res, Plano p, Cuarto cu, Puerta pu){
+   /* public String recorridoEureliano(String res, Plano p, Cuarto cu, Puerta pu){
         res = res.concat(cu.dato);
         pu.visitado = true;
-        if(puertasSinUsar()==0 || puertasSinUsar(cu)== 0){
+        if(puertasSinUsar().size()==0 || puertasSinUsar(cu).size()== 0){
             pu.visitado =false;
             System.out.println(res);
             return res;
@@ -109,29 +143,29 @@ public class RecorridoEuler {
         
         
         return res;
-    }
+    }*/
 
     
-    private int puertasSinUsar(){
-        int res = 0;
+    private ArrayList<Puerta> puertasSinUsar(){
+        ArrayList<Puerta> res = new ArrayList<> ();
         for (int i = 0; i < plano.listaPuerta.size(); i++) {
             if (plano.listaPuerta.get(i).visitado == false)
-                res ++;            
+                res.add(plano.listaPuerta.get(i));            
         }
         return res;
     }
-    private int puertasSinUsar(Cuarto cu){
-        int res = 0;
+    private ArrayList<Puerta> puertasSinUsar(Cuarto cu){
+        ArrayList<Puerta> res = new ArrayList<> ();
         for (int i = 0; i < plano.listaPuerta.size(); i++) {
             Puerta pu = plano.listaPuerta.get(i);
             if (pu.getCuarto1().equals(cu.getCuarto()) || pu.getCuarto2().equals(cu.getCuarto()))
                 if (plano.listaPuerta.get(i).visitado == false)
-                    res ++;            
+                    res.add(pu);            
         }
         return res;
     }
 
-    private Puerta getSigPuerta(Plano p, Cuarto cu) {
+    /*private Puerta getSigPuerta(Plano p, Cuarto cu) {
         Puerta res= null;
             for (int i = 0; i < p.listaPuerta.size(); i++) {
             Puerta pu = p.listaPuerta.get(i);
@@ -151,7 +185,11 @@ public class RecorridoEuler {
             if (puSig.cuarto1.equals(cu)){
                 return puSig.cuarto2;
             }else return puSig.cuarto1;
-    }    
+    }  */  
+
+    
+
+    
 
     
     
