@@ -19,7 +19,6 @@ public class RecorridoHamilton {
             Cuarto cu= plano.listaCuarto.get(i);
             recorridosH(cu);
         }
-        
     }
 
     private void recorridosH(Cuarto cu) {        
@@ -29,21 +28,29 @@ public class RecorridoHamilton {
             cadena = cadena.concat(cu.dato);
             cu.visitado=true;
             hamiltonRecursivo(cadena, cu,cuAdy);
+            cu.visitado=false;
         }
     }
 
     private void hamiltonRecursivo(String cadena, Cuarto cu, Cuarto cuAdy) {
         cadena=cadena.concat(cuAdy.dato);
         cuAdy.visitado=true;
-        if(cuartosPorVisitar().size() == 0){
-            System.out.println(cuartosPorVisitar().size());
-            if(cuartosPorVisitar(cuAdy).size()==0){
-                System.out.println(cuartosPorVisitar(cuAdy).size());
+        if(cuartosPorVisitar(cuAdy).isEmpty()){
+            //System.out.println(cuartosPorVisitar(cuAdy).size());
+            if(cuartosPorVisitar().isEmpty()){
+                //System.out.println(cuartosPorVisitar().size());
+                if(esCicloHamiltoniano(cadena,cuAdy))
                 System.out.println(cadena);
+                System.out.println(cadena.charAt(0));
             }
         }else{
-            
+            ArrayList<Cuarto> cuartosSig = cuartosPorVisitar(cuAdy);
+            for (int i = 0; i < cuartosSig.size(); i++) {
+                Cuarto cuSig= cuartosSig.get(i);
+                hamiltonRecursivo(cadena, cuAdy, cuSig);
+            }
         }
+        cuAdy.visitado=false;
         
     }
 
@@ -65,6 +72,14 @@ public class RecorridoHamilton {
             //System.out.println(plano.listaCuarto.get(i).visitado);
         }
         return res;
+    }
+
+    private boolean esCicloHamiltoniano(String cadena, Cuarto cuAdy) {
+        boolean res = false;
+        char inicio = (cadena.charAt(0));
+        for (int i = 0; i < cuAdy.cuarto.size(); i++) {
+            if(cuAdy.cuarto.get(i).dato.equals(String(inicio)))
+        }
     }
 
 }
