@@ -61,28 +61,18 @@ public class RecorridoEuler {
         if(puertasSinUsar(cuAdy).isEmpty()){
             if(puertasSinUsar().isEmpty()){
                 System.out.println(cadena);
-                pu.visitado=false;
-            }
-                
-        }else{
-            if(puertasSinUsar(cuAdy).size() == 1){
-                Cuarto cuSiguiente=buscarCuarto(cuAdy);
-                Puerta puSiguiente=buscarPuerta(cuAdy,cuSiguiente);
-                eulerRecursivo(cadena, cuAdy, cuSiguiente, puSiguiente);
                 //pu.visitado=false;
-            }else{
-                ArrayList<Cuarto> cuartosSig = llenarCuartosAdyacentes(puertasSinUsar(cuAdy),cuAdy);
-                for (int i = 0; i < cuartosSig.size(); i++) {
-                    Cuarto cuSig = cuartosSig.get(i);
-                    Puerta puSig = buscarPuerta(cuAdy, cuSig);
-                    eulerRecursivo(cadena, cuAdy, cuSig, puSig);
-                    //pu.visitado=false;
-                }
             }
-            
+        }else{
+            ArrayList<Cuarto> cuartosSig = llenarCuartosAdyacentes(puertasSinUsar(cuAdy),cuAdy);
+            for (int i = 0; i < cuartosSig.size(); i++) {
+                Cuarto cuSig = cuartosSig.get(i);
+                Puerta puSig = buscarPuerta(cuAdy, cuSig);
+                eulerRecursivo(cadena, cuAdy, cuSig, puSig);
+                //pu.visitado=false;
+            }
         }
         pu.visitado=false;
-        //return;
     }
     private ArrayList<Cuarto> llenarCuartosAdyacentes(ArrayList<Puerta> puertasSinUsar, Cuarto cu) {
         ArrayList<Cuarto> res= new ArrayList<> ();
@@ -91,8 +81,7 @@ public class RecorridoEuler {
                 if (pu.cuarto1.equals(cu)){
                     res.add(pu.cuarto2);
                 }else res.add(pu.cuarto1);
-            
-        }
+            }
         return res;
     }
     private Cuarto buscarCuarto(Cuarto cu) {
@@ -122,30 +111,6 @@ public class RecorridoEuler {
         }
         return res;
     }
-
-    
-   /* public String recorridoEureliano(String res, Plano p, Cuarto cu, Puerta pu){
-        res = res.concat(cu.dato);
-        pu.visitado = true;
-        if(puertasSinUsar().size()==0 || puertasSinUsar(cu).size()== 0){
-            pu.visitado =false;
-            System.out.println(res);
-            return res;
-        }else
-        {
-            Puerta puSig = getSigPuerta(p, cu);
-            Cuarto cuSig = getSigCuarto(cu, puSig);
-            if (puSig!=null){
-                recorridoEureliano(res, p, cuSig, puSig);
-            }
-            pu.visitado =false;
-        }
-        
-        
-        return res;
-    }*/
-
-    
     private ArrayList<Puerta> puertasSinUsar(){
         ArrayList<Puerta> res = new ArrayList<> ();
         for (int i = 0; i < plano.listaPuerta.size(); i++) {
@@ -164,33 +129,4 @@ public class RecorridoEuler {
         }
         return res;
     }
-
-    /*private Puerta getSigPuerta(Plano p, Cuarto cu) {
-        Puerta res= null;
-            for (int i = 0; i < p.listaPuerta.size(); i++) {
-            Puerta pu = p.listaPuerta.get(i);
-            if (pu.getCuarto1().equals(cu.getCuarto())){
-                if (p.listaPuerta.get(i).visitado == false)
-                    return pu;
-            }else 
-                if (pu.getCuarto2().equals(cu.getCuarto())){
-                    if (p.listaPuerta.get(i).visitado == false)
-                        return pu;
-                }
-        }
-        return res;
-    }
-
-    private Cuarto getSigCuarto(Cuarto cu, Puerta puSig) {
-            if (puSig.cuarto1.equals(cu)){
-                return puSig.cuarto2;
-            }else return puSig.cuarto1;
-    }  */  
-
-    
-
-    
-
-    
-    
 }

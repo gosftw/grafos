@@ -11,8 +11,8 @@ public class Plano
     public boolean conexo = false;
     public Plano()
     {
-        listaCuarto=new ArrayList<Cuarto> ();
-        listaPuerta=new ArrayList<Puerta> ();
+        listaCuarto=new ArrayList<> ();
+        listaPuerta=new ArrayList<> ();
     }
     
     public void crearCuarto(Cuarto cuarto)

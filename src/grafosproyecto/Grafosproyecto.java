@@ -51,17 +51,15 @@ public class Grafosproyecto {
         llenadoPlano(plano, false);
         llenadoPlano(planoConEx, true);
         RecorridoEuler euler = new RecorridoEuler(plano);
-        
-        CantidadComponentes planoSinExterior= new CantidadComponentes();
-        
+        RecorridoHamilton hamilton = new RecorridoHamilton(plano);
+        CantidadComponentes planoSinExterior= new CantidadComponentes();        
         if (planoSinExterior.calcularCantidad(plano)== 1){
             plano.mostrarPlano();
             plano.euleriano = euler.esEureliano(plano);
             if (plano.euleriano.size() < 3){
                 euler.Euler();
             }
-            
-
+            hamilton.Hamilton();
         }
     }
 }
