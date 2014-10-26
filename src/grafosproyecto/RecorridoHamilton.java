@@ -39,9 +39,10 @@ public class RecorridoHamilton {
             //System.out.println(cuartosPorVisitar(cuAdy).size());
             if(cuartosPorVisitar().isEmpty()){
                 //System.out.println(cuartosPorVisitar().size());
-                if(esCicloHamiltoniano(cadena,cuAdy))
+                if(esCicloHamiltoniano(cadena,cuAdy)){
+                    System.out.println(cadena+cadena.charAt(0)+" Ciclo Hamiltoniano");
+                }else
                 System.out.println(cadena);
-                System.out.println(cadena.charAt(0));
             }
         }else{
             ArrayList<Cuarto> cuartosSig = cuartosPorVisitar(cuAdy);
@@ -78,8 +79,10 @@ public class RecorridoHamilton {
         boolean res = false;
         char inicio = (cadena.charAt(0));
         for (int i = 0; i < cuAdy.cuarto.size(); i++) {
-            if(cuAdy.cuarto.get(i).dato.equals(String(inicio)))
+            if(cuAdy.cuarto.get(i).dato.charAt(0)==inicio)
+                return true;
         }
+        return res;
     }
 
 }

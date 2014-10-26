@@ -26,7 +26,7 @@ public class Grafosproyecto {
         
         pla.crearPuerta("1", "2");
         pla.crearPuerta("1", "3");
-        //pla.crearPuerta("1", "4");
+        pla.crearPuerta("1", "4");
         //pla.crearPuerta("1", "5");
         
         pla.crearPuerta("2", "4");
@@ -52,6 +52,7 @@ public class Grafosproyecto {
         llenadoPlano(planoConEx, true);
         RecorridoEuler euler = new RecorridoEuler(plano);
         RecorridoHamilton hamilton = new RecorridoHamilton(plano);
+        EulerMasHamilton euHam = new EulerMasHamilton(plano);
         CantidadComponentes planoSinExterior= new CantidadComponentes();        
         if (planoSinExterior.calcularCantidad(plano)== 1){
             plano.mostrarPlano();
