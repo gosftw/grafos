@@ -26,11 +26,11 @@ public class Grafosproyecto {
         
         pla.crearPuerta("1", "2");
         pla.crearPuerta("1", "3");
-        pla.crearPuerta("1", "4");
+        //pla.crearPuerta("1", "4");
         //pla.crearPuerta("1", "5");
         
         pla.crearPuerta("2", "4");
-        pla.crearPuerta("2", "3");
+        //pla.crearPuerta("2", "3");
         //pla.crearPuerta("2", "5");
         
         pla.crearPuerta("3", "4");
@@ -61,6 +61,7 @@ public class Grafosproyecto {
                 euler.Euler();
             }
             hamilton.Hamilton();
+            euHam.cumpleEyH();
         }
     }
 }
